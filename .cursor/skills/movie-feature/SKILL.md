@@ -23,7 +23,7 @@ Follow `AGENTS.md`. This skill is the workflow for one feature. It does not repl
 5. Call the service from a Server Component. Add `loading.tsx` on any route that waits on OMDb. A movie route also gets `error.tsx`.
 6. Cache movie details with `cacheLife('days')` on the service. Cache search with `cacheLife('minutes')`, keyed by the query. The search page reads `/search?q=`.
 7. Render posters with `next/image`. Add the poster host to `images.remotePatterns` only after checking a real poster URL.
-8. Finish only after `npm run lint` and `npm run build` pass. If the UI changed, verify that flow in the browser.
+8. Finish only after `npm run check` passes. If the UI changed, verify that flow in the browser. Commit on a `feature/` or `fix/` branch using `YYYYMMDD-<kind> <what it does>`, then merge into `develop`. `master` changes only through a merge request from `develop`.
 
 ## Do not
 

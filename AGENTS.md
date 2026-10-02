@@ -109,7 +109,54 @@ Store `OMDB_API_KEY` in `.env.local`. Read it only on the server. Never use a `N
 - Dev: `npm run dev`
 - Lint: `npm run lint`
 - Build: `npm run build`
+- Check: `npm run check` (lint, then build)
 - Production server: `npm run start`
+
+## Git
+
+Remote: `git@github.com:HoeumSenghun/hev_merl_rg.git`
+
+### Branches
+
+- `master` is the released site. It changes only through a merge request from `develop`.
+- `develop` is where finished work collects.
+- `feature/<name>` is new work, cut from `develop`.
+- `fix/<name>` is a bugfix, cut from `develop`.
+
+### Flow
+
+1. Update `develop`, then cut `feature/<name>` or `fix/<name>` from it.
+2. Commit on that branch.
+3. Run `npm run check`.
+4. Merge that branch into `develop`. This step does not need a merge request.
+5. Open a merge request from `develop` into `master`.
+6. Deploy only after that merge request is on `master`. `develop` is not deployed.
+
+Do not commit on `master`. Do not push straight to `master`. Do not force-push `master` or `develop`.
+
+A bugfix uses the same path as a feature: branch from `develop`, fix, run `npm run check`, merge into `develop`, then a merge request into `master`.
+
+### Commits
+
+One line:
+
+`YYYYMMDD-<kind> <what it does>`
+
+The date is the commit day, eight digits, no separators. `<kind>` is `feature`, `fix`, or `setup`.
+
+- `20261002-feature add movie search`
+- `20261002-fix poster host`
+- `20261002-setup git branches and checks`
+
+### Env
+
+`OMDB_API_KEY` lives in `.env.local`. Confirm the name is present when a task needs the API. Do not print the value, log it, or commit the file. Read it only in server code.
+
+### Checks and deploy
+
+`npm run check` is the gate before a merge into `develop` and before a merge request into `master`. GitHub Actions runs that command on pushes to `develop` and on merge requests into `master`.
+
+Deploy the `master` branch only, after its merge request is merged.
 
 ## Skills
 
@@ -117,7 +164,7 @@ One project skill: `.cursor/skills/movie-feature/`. It runs when a task adds or 
 
 ## Definition of done
 
-A task is finished only after `npm run lint` and `npm run build` both pass. If the change is visible in the UI, verify that flow in the browser before saying it is done.
+A task is finished only after `npm run check` passes. If the change is visible in the UI, verify that flow in the browser before saying it is done. Merge the branch into `develop` after that. Open a merge request into `master` when `develop` is ready to release.
 
 ## Status
 
