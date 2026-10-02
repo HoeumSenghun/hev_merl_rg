@@ -160,7 +160,7 @@ Deploy the `master` branch only, after its merge request is merged.
 
 ## Skills
 
-One project skill: `.cursor/skills/movie-feature/`. It runs when a task adds or changes search, a movie page, posters, or OMDb data. Do not add skills for shadcn, caching, lint, or fonts. Those rules are in this file.
+One project skill: `.cursor/skills/movie-feature/`. Run it with `/movie-feature` and the task. That run continues until the feature is on `develop` and `npm run check` has passed. Do not add skills for shadcn, caching, lint, or fonts. Those rules are in this file.
 
 ## Definition of done
 

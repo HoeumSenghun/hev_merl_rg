@@ -2,13 +2,19 @@
 name: movie-feature
 description: >-
   Adds or changes a Hev Merl Rg movie page or OMDb feature with Server
-  Components, Zod DTOs, and Next.js caching. Use when the user asks to add or
-  change search, a movie page, posters, OMDb data, or files under lib/ or app/.
+  Components, Zod DTOs, and Next.js caching. Use when the user runs
+  /movie-feature or asks to add or change search, a movie page, posters, OMDb
+  data, or files under lib/ or app/.
+disable-model-invocation: true
 ---
 
 # Movie feature
 
 Follow `AGENTS.md`. This skill is the workflow for one feature. It does not replace those rules.
+
+One run finishes the feature. Do not stop between steps to ask whether to continue. Do not start a second skill. Do not use `/loop`.
+
+Stop only when every item in **Done** is true, or when a blocker below is real.
 
 ## Steps
 
@@ -23,7 +29,25 @@ Follow `AGENTS.md`. This skill is the workflow for one feature. It does not repl
 5. Call the service from a Server Component. Add `loading.tsx` on any route that waits on OMDb. A movie route also gets `error.tsx`.
 6. Cache movie details with `cacheLife('days')` on the service. Cache search with `cacheLife('minutes')`, keyed by the query. The search page reads `/search?q=`.
 7. Render posters with `next/image`. Add the poster host to `images.remotePatterns` only after checking a real poster URL.
-8. Finish only after `npm run check` passes. If the UI changed, verify that flow in the browser. Commit on a `feature/` or `fix/` branch using `YYYYMMDD-<kind> <what it does>`, then merge into `develop`. `master` changes only through a merge request from `develop`.
+8. Run `npm run check`. If it fails, fix the failure and run it again.
+9. If the UI changed, verify that flow in the browser, then fix anything that is broken and check again.
+10. Commit on a `feature/` or `fix/` branch using `YYYYMMDD-<kind> <what it does>`, then merge into `develop`. Push `develop`. Leave `master` for a merge request.
+
+## Done
+
+- The requested page or data change is in the repo.
+- `npm run check` passed on the last run.
+- A visible UI change was exercised in the browser.
+- The commit is on `develop`, and `develop` is pushed.
+- `master` was not changed.
+
+## Stop and report
+
+Stop and say what is blocking when:
+
+- `OMDB_API_KEY` is missing from `.env.local` and the task needs OMDb. Do not invent a key. Do not print a value.
+- The same check failure remains after a real fix.
+- The task needs a product choice that `AGENTS.md` does not already make.
 
 ## Do not
 
