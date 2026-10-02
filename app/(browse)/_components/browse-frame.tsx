@@ -11,12 +11,20 @@ export function BrowseFrame({ children, search }: BrowseFrameProps) {
     <>
       <header className="border-b border-zinc-200 dark:border-zinc-800">
         <div className="mx-auto flex w-full max-w-5xl flex-col gap-4 px-4 py-4 sm:flex-row sm:items-center sm:justify-between">
-          <Link className="flex flex-col leading-tight" href="/">
-            <span className="text-lg font-semibold" lang="km">
-              ហេវមើលរឿង
-            </span>
-            <span className="text-sm text-zinc-500">Hev Merl Rg</span>
-          </Link>
+          <div className="flex items-end gap-4">
+            <Link className="flex flex-col leading-tight" href="/">
+              <span className="text-lg font-semibold" lang="km">
+                ហេវមើលរឿង
+              </span>
+              <span className="text-sm text-zinc-500">Hev Merl Rg</span>
+            </Link>
+            <Link
+              className="pb-0.5 text-sm text-zinc-600 dark:text-zinc-400"
+              href="/about"
+            >
+              About
+            </Link>
+          </div>
           {search}
         </div>
       </header>

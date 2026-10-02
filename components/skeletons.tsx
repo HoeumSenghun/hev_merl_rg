@@ -15,6 +15,33 @@ export function SearchSkeleton() {
   );
 }
 
+export function PosterRowSkeleton() {
+  return (
+    <div className="flex gap-3 overflow-hidden" aria-hidden="true">
+      {Array.from({ length: 6 }, (_, index) => (
+        <div
+          className="aspect-300/445 w-28 shrink-0 rounded-lg bg-zinc-200 sm:w-36 dark:bg-zinc-800"
+          key={index}
+        />
+      ))}
+    </div>
+  );
+}
+
+export function HomeSkeleton() {
+  return (
+    <div className="space-y-10" aria-hidden="true">
+      <MovieSkeleton />
+      {Array.from({ length: 3 }, (_, index) => (
+        <div className="space-y-3" key={index}>
+          <div className="h-6 w-32 rounded bg-zinc-200 dark:bg-zinc-800" />
+          <PosterRowSkeleton />
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export function MovieSkeleton() {
   return (
     <div

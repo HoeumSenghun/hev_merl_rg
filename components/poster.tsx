@@ -6,6 +6,7 @@ type PosterProps = {
   title: string;
   posterUrl: string | null;
   priority?: boolean;
+  transitionName?: string;
 };
 
 export function Poster({
@@ -13,6 +14,7 @@ export function Poster({
   title,
   posterUrl,
   priority = false,
+  transitionName,
 }: PosterProps) {
   const frame = posterUrl ? (
     <Image
@@ -29,5 +31,9 @@ export function Poster({
     </div>
   );
 
-  return <ViewTransition name={`poster-${imdbId}`}>{frame}</ViewTransition>;
+  return (
+    <ViewTransition name={transitionName ?? `poster-${imdbId}`}>
+      {frame}
+    </ViewTransition>
+  );
 }
